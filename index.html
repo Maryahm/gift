@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To my most charming IT Tech Boyfriend</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: url('smd.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: white;
+      overflow: hidden;
+    }
+    .hidden {
+      display: none;
+    }
+    .step-container {
+      margin-top: 40px;
+      position: relative;
+      z-index: 10;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      max-width: 400px;
+      margin: 20px 0;
+      border: 5px solid white;
+      border-radius: 10px;
+    }
+    #finalMessageBox img {
+      max-width: 90%;
+      height: auto;
+      max-height: 90vh;
+      border: 5px solid white;
+      border-radius: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff85c2;
+    }
+    input[type="text"] {
+      display: block;
+      padding: 10px;
+      font-size: 16px;
+      margin: 15px auto;
+      width: 70%;
+      max-width: 300px;
+      border: 2px solid #ff69b4;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    #dateError {
+      color: #f44336;
+      font-weight: bold;
+      margin-top: 10px;
+      background: rgba(255, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+    @keyframes glitter {
+      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4; }
+      50% { text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4, 0 0 40px #ff69b4, 0 0 60px #ff69b4; }
+    }
+    .glitter {
+      animation: glitter 2s infinite;
+      color: #ff69b4;
+      font-size: 2em;
+    }
+    .glitter-correct {
+      animation: glitter 2s infinite;
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="glitter">🎉 A Small Surprise for You! 🎉</h1>
+
+  <!-- Question 1 -->
+  <div id="step1" class="step-container">
+    <p>Hey my darling, everything will go on fine. But what's special about next month?</p>
+    <button onclick="nextStep('step1', 'step2', 'Anniversary')">Anniversary</button>
+    <button onclick="showDialog('oh! so YOU DONT KNOW')">Engagement</button>
+    <button onclick="showDialog('PODA MONKEY')">Proposal</button>
+    <p id="correct1" class="glitter-correct hidden">Correct! Anniversary 🎉</p>
+  </div>
+
+  <!-- Question 2 -->
+  <div id="step2" class="step-container hidden">
+    <img src="bus.jpg" alt="Special Memory">
+    <p>When was this picture taken? lemme check your memory my monkey (Enter the date in DD/MM/YY format)</p>
+    <input type="text" id="dateAnswer" placeholder="Enter date">
+    <p id="dateError">Oops! So you remember everything except this. Even Nomy's dress for the last Xmas</p>
+    <button onclick="checkDate()">Submit</button>
+  </div>
+
+  <!-- Surprise Text (Before final image) -->
+  <div id="surpriseText" class="step-container hidden">
+    <p>My darling, congratulations on your new job in Bangalore! well i know its hard. but Im here for you in anything you want and don't be sad. Cause we are together in it.
+        I’m so proud of you and can’t wait to create more beautiful memories together. 
+        Here’s to us and our infinite love! ❤️ 🎉</p>
+    <button onclick="showFinalSurprise()">Click to Reveal the Surprise!</button>
+  </div>
+
+  <!-- Final Step -->
+  <div id="finalStep" class="step-container hidden">
+    <div id="finalMessageBox">
+      <h2 class="glitter-correct">🎉 You’ve Completed the Surprise! 🎉</h2>
+      <img src="final me.jpg" alt="Surprise Picture">
+    </div>
+  </div>
+
+  <script>
+    function nextStep(currentStep, nextStep, message) {
+      const current = document.getElementById(currentStep);
+      const next = document.getElementById(nextStep);
+
+      if (current && next) {
+        current.classList.add('hidden');
+        next.classList.remove('hidden');
+
+        const correctMessage = current.querySelector('.glitter-correct');
+        if (correctMessage) correctMessage.classList.remove('hidden');
+      }
+    }
+
+    function checkDate() {
+      const answer = document.getElementById('dateAnswer').value.trim();
+      const correctAnswer = "16/08/24";
+      const error = document.getElementById('dateError');
+      if (answer === correctAnswer) {
+        nextStep('step2', 'surpriseText');
+        error.style.display = 'none';
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    function showDialog(message) {
+      alert(message);
+    }
+
+    function showFinalSurprise() {
+      nextStep('surpriseText', 'finalStep');
+    }
+  </script>
+</body>
+</html>
